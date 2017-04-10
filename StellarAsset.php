@@ -14,17 +14,21 @@ class StellarAsset extends AssetBundle
 {
     public $sourcePath = '@bower/stellar';
 
-    public $js = [
-        'jquery.stellar.min.js',
-    ];
-
     public $publishOptions = [
-        'only'=>[
-            'jquery.stellar.min.js',
-        ]
+        'except'=>['/libs/','/src/','/test/'],
+        'only'=>['*.js']
     ];
 
     public $depends = [
         'yii\web\JqueryAsset',
     ];
+
+    public function init()
+    {
+        if (YII_DEBUG) {
+            $this->js = ['jquery.stellar.js'];
+        } else {
+            $this->js = ['jquery.stellar.min.js'];
+        }
+    }
 }
